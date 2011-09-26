@@ -15,9 +15,9 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: ossc_development
+  database: cwang_development
   pool: 5
-  username: ossc
+  username: cwang
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ test:
   encoding: unicode
   database: ossc_test
   pool: 5
-  username: ossc
+  username: cwang
   password:
 
 production:
