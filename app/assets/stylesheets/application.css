@@ -11,3 +11,19 @@ span {
   font-weight: bold;
   font: 16px "Helvetica", Verdana, sans-serif;
 }
+
+#main_container {
+  width: 1000px;
+  height: 800px;
+  overflow: auto;
+  margin: auto;
+}
+
+.clear {
+  clear: both;
+}
+.login_information {
+  float: right;
+  margin-bottom: 20px;
+  background: #EEE;
+}

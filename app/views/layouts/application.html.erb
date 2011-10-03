@@ -8,21 +8,24 @@
 </head>
 <body>
 
-<div class="flash_messages">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+<div id="main_container">
+  <div class="flash_messages">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </div>
+  <div class="login_information">
+    <% if user_signed_in? %>
+      <span>Logged in as: <%= current_user.email %></span> 
+      <span><%= link_to 'Log Out', destroy_user_session_path, :method => 'DELETE' %>
+    <% else %>
+      <span><%= link_to 'Sign in', new_user_session_path %></span>
+      <span><%= link_to 'Register an account', new_user_registration_path %></span>
+    <% end %>
+
+  </div>
+  <%= yield %>
 </div>
-<div class="login_information">
-  <% if user_signed_in? %>
-    <span>Logged in as: <%= current_user.email %></span> 
-    <span><%= link_to 'Log Out', destroy_user_session_path, :method => 'DELETE' %>
-  <% else %>
-    <span><%= link_to 'Sign in', new_user_session_path %></span>
-    <span><%= link_to 'Register an account', new_user_registration_path %></span>
-  <% end %>
-  
-</div>
-<%= yield %>
+
 
 </body>
 </html>
