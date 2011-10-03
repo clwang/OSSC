@@ -1,10 +1,1 @@
 <h1>Welcome to OSSC Homepage</h1>
-
-Add login information here and a splash page describing the product
-
-<% if user_signed_in? %>
-  <h2><%= current_user.email %></h2>
-<% else %>
-  <p><%= link_to 'Sign in', new_user_session_path %></p>
-  <p><%= link_to 'Register an account', new_user_registration_path %></p>
-<% end %>
