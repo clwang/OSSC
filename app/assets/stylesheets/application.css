@@ -27,3 +27,12 @@ span {
   margin-bottom: 20px;
   background: #EEE;
 }
+
+.body_content {
+  text-align: center;
+}
+
+#home_content {
+  padding: 20px;
+  font-size: 12px;
+}
