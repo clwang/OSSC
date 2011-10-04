@@ -4,6 +4,8 @@ Ossc::Application.routes.draw do
   devise_for :users
 
   get "home/index"
+  
+  match '/dashboard' => "dashboard#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
