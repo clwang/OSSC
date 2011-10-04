@@ -24,6 +24,12 @@
 
   </div>
   <div class="clear"></div>
+  <% if user_signed_in? %>
+  <div class="main_nav">
+    <%= link_to 'Home', '/dashboard' %>
+    <%= link_to 'Projects', projects_path() %>
+  </div>
+  <% end %>
   <div class="body_content">
     <%= yield %>
   </div>
