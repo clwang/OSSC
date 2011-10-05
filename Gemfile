@@ -8,7 +8,10 @@ gem 'rails', '3.1.0'
 gem 'pg'
 gem 'thin'
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
-gem 'oauth2', :git => 'git://github.com/intridea/oauth2.git'
+# gem 'oauth2', :git => 'git://github.com/intridea/oauth2.git'
+gem 'omniauth'
+gem "oa-oauth", :require => "omniauth/oauth"
+
 
 # Gems used only for assets and not required
 # in production environments by default.
