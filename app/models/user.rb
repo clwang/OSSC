@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :projects
   
   def self.find_for_github_oauth(access_token, signed_in_resource=nil)
+    Rails.logger.info access_token.inspect
     data = access_token['extra']['user_hash']
     if user = User.find_by_email(data["email"])
       user
