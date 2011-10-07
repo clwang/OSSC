@@ -2,6 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   def github
     # You need to implement the method below in your model
+    Rails.logger.info current_user.inspect
     @user = User.find_for_github_oauth(env["omniauth.auth"], current_user)
     Rails.logger.info @user.inspect
     if @user.persisted?
@@ -12,7 +13,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       # then redirect to a page to fill in more information, but we should instead save the user in the database
       # we need to figure out what data we want to store in terms of what is currently available to the github api
       # we definitely need to store the user's github api token so we can access their stuff
-      session["devise.github_data"] = env["omniauth.auth"]
+      # session["devise.github_data"] = env["omniauth.auth"]
+      # self.current_user = @user
       # redirect_to new_user_registration_url
       # currently this does not sign you in. So we actually need to get the user into a signed in state
       redirect_to dashboard_path()

@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  validates :email, :presence => true
   has_many :projects
   
   def self.find_for_github_oauth(access_token, signed_in_resource=nil)
@@ -20,6 +19,8 @@ class User < ActiveRecord::Base
   end
   
   def self.new_with_session(params, session)
+    Rails.logger.info "new with session"
+    Rails.logger.info "#{session.inspect}"
     super.tap do |user|
       if data = session["devise.github_data"] && session["devise.github_data"]["extra"]["user_hash"]
         user.email = data["email"]
