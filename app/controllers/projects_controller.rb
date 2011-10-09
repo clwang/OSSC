@@ -41,6 +41,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    Rails.logger.info params[:project]
     @project = Project.new(params[:project])
     @project.us_user_id = current_user.id
     respond_to do |format|

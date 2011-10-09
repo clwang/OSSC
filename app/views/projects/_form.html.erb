@@ -10,7 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="project_form">
+    <%= f.label :name %>
+    <%= f.text_field :name %> <br />
+    <%= f.label :description, :style => "text-align: top;" %>
+    <%= f.text_area :description, :size => "50x20" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

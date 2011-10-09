@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20111009073253) do
   create_table "projects", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
     t.string   "status"
     t.text     "description"
     t.integer  "total_points"

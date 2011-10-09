@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<div>
+  <h2><%= @project.name %></h2>
+  <p>Project description:</p>
+  <p><%= @project.description %></p>
+</div>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
