@@ -3,21 +3,29 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     # You need to implement the method below in your model
     Rails.logger.info current_user.inspect
-    @user = User.find_for_github_oauth(env["omniauth.auth"], current_user)
+    auth = request.env["omniauth.auth"]
+    token = UserOauthToken.find_by_provider_and_uid(auth["provider"], auth["uid"].to_s)
     Rails.logger.info @user.inspect
-    if @user.persisted?
+
+    if token
+      Rails.logger.info "user has persisted"
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Github"
-      sign_in_and_redirect @user, :event => :authentication
-    else
-      # stores all the github data in the session hash
-      # then redirect to a page to fill in more information, but we should instead save the user in the database
-      # we need to figure out what data we want to store in terms of what is currently available to the github api
-      # we definitely need to store the user's github api token so we can access their stuff
-      # session["devise.github_data"] = env["omniauth.auth"]
-      # self.current_user = @user
-      # redirect_to new_user_registration_url
-      # currently this does not sign you in. So we actually need to get the user into a signed in state
+      sign_in_and_redirect(:user, token.user)
+    elsif current_user
+      Rails.logger.info "associated the current user and the github account"
+      current_user.user_oauth_tokens.create!(:provider => auth["provider"], :uid => auth["uid"].to_s )
+      flash[:notice] = "Successfully associated your Github account"
       redirect_to dashboard_path()
+    else
+      user = User.new
+      user.apply_omniauth(auth)
+      if user.save
+        flash[:notice] = "Signed in successfully."
+        sign_in_and_redirect(:user, user)
+      else
+        session["devise.github_data"] = env["omniauth.auth"]
+        redirect_to new_user_registration_url  
+      end
     end
   end
   
