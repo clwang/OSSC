@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111009025645) do
+ActiveRecord::Schema.define(:version => 20111009073253) do
 
   create_table "projects", :force => true do |t|
     t.datetime "created_at"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(:version => 20111009025645) do
     t.text     "description"
     t.integer  "total_points"
     t.integer  "us_user_id"
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.text     "description"
+    t.integer  "point_value"
+    t.string   "status"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_oauth_tokens", :force => true do |t|
