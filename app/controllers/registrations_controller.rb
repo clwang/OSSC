@@ -10,6 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
     super
     if session["devise.github_data"]
       @user.apply_omniauth(session["devise.github_data"])
+      data = session["devise.github_data"]
+      @user.nickname = data["user_info"]["nickname"]
       @user.valid?
     end
   end

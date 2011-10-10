@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20111009073253) do
 
   create_table "tasks", :force => true do |t|
     t.text     "description"
+    t.string   "title"
     t.integer  "point_value"
     t.string   "status"
     t.integer  "project_id"

@@ -43,6 +43,7 @@ class ProjectsController < ApplicationController
   def create
     Rails.logger.info params[:project]
     @project = Project.new(params[:project])
+    @project.total_points = 100 # this will be the default for now
     @project.us_user_id = current_user.id
     respond_to do |format|
       if @project.save

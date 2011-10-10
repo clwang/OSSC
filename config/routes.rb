@@ -1,5 +1,8 @@
 Ossc::Application.routes.draw do
-  resources :projects
+  resources :projects do
+    resources :tasks
+  end
+  
   resources :tasks
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'registrations' } do

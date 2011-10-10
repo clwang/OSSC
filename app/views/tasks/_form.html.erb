@@ -1,0 +1,16 @@
+<%= form_for [@project, @task] do |f| %>
+  <p>
+    <%= f.label :title %> <br>
+    <%= f.text_field :title %> 
+  </p>
+  <p>
+    <%= f.label :description %> <br>
+    <%= f.text_area :description, :size => "50x20" %>
+  </p>
+  <p>
+    <%= f.label :point_value %> <br>
+    <%= f.text_field :point_value %>
+  </p>
+
+  <%= f.submit %>
+<% end %>
