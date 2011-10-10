@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20111009073253) do
     t.string   "status"
     t.text     "description"
     t.integer  "total_points"
-    t.integer  "us_user_id"
+    t.integer  "user_id"
   end
 
   create_table "tasks", :force => true do |t|
