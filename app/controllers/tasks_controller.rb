@@ -2,6 +2,10 @@ class TasksController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_project, :except => :show
   
+  def index
+    @tasks = @project.tasks
+  end
+  
   def new
     @task = @project.tasks.build
   end

@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
     Rails.logger.info params[:project]
     @project = Project.new(params[:project])
     @project.total_points = 100 # this will be the default for now
-    @project.us_user_id = current_user.id
+    @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -81,6 +81,14 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url }
       format.json { head :ok }
+    end
+  end
+  
+  def my_projects
+    if current_user
+      @projects = current_user.projects
+    else
+      @projects = nil
     end
   end
 end

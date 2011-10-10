@@ -4,6 +4,6 @@ class AddProjectFields < ActiveRecord::Migration
     add_column :projects, :status, :string
     add_column :projects, :description, :text
     add_column :projects, :total_points, :integer
-    add_column :projects, :us_user_id, :integer
+    add_column :projects, :user_id, :integer
   end
 end

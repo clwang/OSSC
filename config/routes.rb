@@ -1,5 +1,8 @@
 Ossc::Application.routes.draw do
   resources :projects do
+    collection do
+      get :my_projects
+    end
     resources :tasks
   end
   
