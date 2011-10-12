@@ -11,8 +11,7 @@ class TasksController < ApplicationController
   end
   
   def create
-    @task = Task.new(params[:task])
-    @task.project_id = params[:project_id]
+    @task = @project.tasks.build(params[:task].merge!(:user => current_user))
     @task.status = "open"
     respond_to do |format|
       if @task.save
