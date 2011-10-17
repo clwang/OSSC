@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012213240) do
+ActiveRecord::Schema.define(:version => 20111017071220) do
 
   create_table "projects", :force => true do |t|
     t.datetime "created_at"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20111012213240) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "todos", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_oauth_tokens", :force => true do |t|
