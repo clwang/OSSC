@@ -4,7 +4,7 @@
     <th> Title </th>
     <th> Description </th>
     <th> Point Value </th>
-    <th> Work on this task </th>
+    <th> Create pull request </th>
   </tr> 
 </thead>
 <tbody>
@@ -13,7 +13,7 @@
     <td><%= task.title %></td>
     <td><%= task.description %></td>
     <td><%= task.point_value %></td>
-    <td><%= button_to 'Add', { :action => 'create', :controller => 'todo', :task_id => task.id } %></td>
+    <td><%= button_to 'Pull Request' %></td>
   </tr>
 <% end %>
 </tbody>

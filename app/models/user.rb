@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :user_oauth_tokens, :class_name => "UserOauthToken"
   has_one :rank, :class_name => "Rank", :foreign_key => "rank_id"
-  has_many :tasks
+  has_many :todos, :class_name => "Todo"
+  has_many :tasks, :through => :todos
   
   def self.new_with_session(params, session)
     # this method is called before building a resource. We use this to copy any information from the auth hash

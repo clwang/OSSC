@@ -7,7 +7,8 @@ Ossc::Application.routes.draw do
   end
   
   resources :tasks
-  
+  resources :todo
+    
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => 'registrations' } do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
     #get 'sign_in', :to => 'users/sessions#new', :as => :new_user_session
