@@ -1,7 +1,20 @@
+<table>
+<thead>
+  <tr>
+    <th> Title </th>
+    <th> Description </th>
+    <th> Point Value </th>
+    <th> Work on this task </th>
+  </tr> 
+</thead>
+<tbody>
 <% @tasks.each do |task| %>
-  <div>
-    <p><%= task.title %></p>
-    <p><%= task.description %></p>  
-  </div>
+  <tr>
+    <td><%= task.title %></td>
+    <td><%= task.description %></td>
+    <td><%= task.point_value %></td>
+    <td><%= button_to 'Add' %></td>
+  </tr>
 <% end %>
-  
+</tbody>
+</table>  

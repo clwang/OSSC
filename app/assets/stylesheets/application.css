@@ -36,3 +36,13 @@ span {
   padding: 20px;
   font-size: 12px;
 }
+
+
+/* Generic Table styles */
+table {
+  border: 1px solid;
+}
+
+table th {
+  padding: 5px 10px;
+}

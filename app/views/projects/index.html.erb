@@ -1,12 +1,13 @@
 <h1>Listing projects</h1>
 
 <table>
+<thead>
   <tr>
-    <th></th>
+    <th>Project Name</th>
     <th></th>
     <th></th>
   </tr>
-
+</thead>
 <% @projects.each do |project| %>
   <tr>
     <td><%= project.name %></td>
