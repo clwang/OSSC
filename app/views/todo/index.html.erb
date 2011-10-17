@@ -1,6 +1,7 @@
 <table>
 <thead>
   <tr>
+    <th> Project name </th>
     <th> Title </th>
     <th> Description </th>
     <th> Point Value </th>
@@ -10,6 +11,7 @@
 <tbody>
 <% @tasks.each do |task| %>
   <tr>
+    <td><%= task.project.name %></td>
     <td><%= task.title %></td>
     <td><%= task.description %></td>
     <td><%= task.point_value %></td>

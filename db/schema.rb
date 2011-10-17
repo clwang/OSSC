@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017173134) do
+ActiveRecord::Schema.define(:version => 20111017213545) do
 
   create_table "projects", :force => true do |t|
     t.datetime "created_at"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20111017173134) do
     t.text     "description"
     t.integer  "total_points"
     t.integer  "user_id"
+    t.string   "repo_name"
   end
 
   create_table "pull_requests", :force => true do |t|

@@ -37,6 +37,14 @@ span {
   font-size: 12px;
 }
 
+.main_nav {
+  margin-bottom: 10px;
+}
+
+.main_nav a {
+  padding: 5px;
+  font-size: 1.2em;
+}
 
 /* Generic Table styles */
 table {

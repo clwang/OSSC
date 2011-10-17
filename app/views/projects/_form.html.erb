@@ -14,7 +14,9 @@
     <%= f.label :name %>
     <%= f.text_field :name %> <br />
     <%= f.label :description, :style => "text-align: top;" %>
-    <%= f.text_area :description, :size => "50x20" %>
+    <%= f.text_area :description, :size => "50x20" %> <br />
+    <%= f.label :repo_name, 'Repository name' %>
+    <%= f.select :repo_name, @repo_names, {} %>
   </div>
   <div class="actions">
     <%= f.submit %>
