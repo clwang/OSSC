@@ -15,7 +15,7 @@
     <td><%= task.title %></td>
     <td><%= task.description %></td>
     <td><%= task.point_value %></td>
-    <td><%= button_to 'Pull Request' %></td>
+    <td><%= button_to 'Pull Request', { :action => 'new', :controller => 'pull_requests' }, { :method => :get } %></td>
   </tr>
 <% end %>
 </tbody>

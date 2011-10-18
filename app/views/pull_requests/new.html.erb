@@ -1,0 +1,26 @@
+<%= form_for(@pull_request) do |f| %>
+  <% if @pull_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pull_request.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @pull_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="pull_request_form">
+    <%= f.label :title %>
+    <%= f.text_field :title %> <br />
+    <%= f.label :body %>
+    <%= f.text_field :body %> <br />
+    <%= f.label :base %>
+    <%= f.text_field :base %> <br />
+    <%= f.label :head %>
+    <%= f.text_field :head %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
