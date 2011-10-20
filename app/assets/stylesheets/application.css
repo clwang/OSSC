@@ -32,6 +32,10 @@ span {
   text-align: center;
 }
 
+.form {
+  text-align: left;
+}
+
 #home_content {
   padding: 20px;
   font-size: 12px;

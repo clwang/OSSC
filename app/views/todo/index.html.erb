@@ -15,7 +15,7 @@
     <td><%= task.title %></td>
     <td><%= task.description %></td>
     <td><%= task.point_value %></td>
-    <td><%= button_to 'Pull Request', { :action => 'new', :controller => 'pull_requests' }, { :method => :get } %></td>
+    <td><%= link_to 'Pull Request', new_pull_request_path(:task_id => task) %></td>
   </tr>
 <% end %>
 </tbody>

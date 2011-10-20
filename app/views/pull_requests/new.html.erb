@@ -10,15 +10,18 @@
       </ul>
     </div>
   <% end %>
-  <div class="pull_request_form">
+  <div class="pull_request_form form">
     <%= f.label :title %>
     <%= f.text_field :title %> <br />
     <%= f.label :body %>
     <%= f.text_field :body %> <br />
-    <%= f.label :base %>
-    <%= f.text_field :base %> <br />
-    <%= f.label :head %>
-    <%= f.text_field :head %>
+    <%= f.label :base, 'Base Branch' %>
+    <%= f.select :base, @branches, {} %> <br />
+    <%= f.label :head, 'Head Branch' %>
+    <%= f.text_field :head, :value => 'master' %>
+    <%= f.hidden_field :task_id, :value => @task.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :repo_name, :value => @project.repo_name %>
   </div>
   <div class="actions">
     <%= f.submit %>

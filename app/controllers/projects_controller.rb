@@ -92,17 +92,5 @@ class ProjectsController < ApplicationController
     else
       @projects = nil
     end
-  end
-
-  private
-    def get_repo_list
-      token = current_user.user_oauth_tokens.first.access_token
-      git = Github.new(:oauth_token => token)
-      @repo_names = []
-      git.repos.list_repos.each do | repo |
-        option = [repo.name,repo.name]
-        @repo_names.push(option)
-      end
-      Rails.logger.info @repo_names.inspect
-    end
+  end    
 end
