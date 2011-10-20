@@ -1,5 +1,6 @@
 class PullRequestsController < ApplicationController
-
+  before_filter :authenticate_user!
+  
   def index
     # We should list the pull requests either both Github and our model
   end
@@ -20,11 +21,20 @@ class PullRequestsController < ApplicationController
   def create
     #create the pull requests object, also make the pull request via Github API
     # we need to change the status of that todo task to pending request once we create it
+    # need to set the todo status to pending
+
     @pull_request = PullRequest.new(params[:pull_request])
-    @pull_request.status = "pending"
+    @pull_request.status = "open"
     @pull_request.save!
+
+    @todo = Todo.find(params[:task_id])
+    @todo.status = "pending"
+    @todo.save!
+
     flash[:success] = "Pull request has been created."
+
     create_github_pull_request
+
     redirect_to todo_index_path
   end
 

@@ -51,6 +51,19 @@ span {
 }
 
 /* Generic Table styles */
+
+.table_container {
+
+}
+
+.table_container h2 {
+  text-decoration: underline;
+}
+
+.table_wrapper {
+  width: 800px;
+  margin: 0 auto;
+}
 table {
   border: 1px solid;
 }

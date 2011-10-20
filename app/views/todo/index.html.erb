@@ -1,22 +1,53 @@
-<table>
-<thead>
-  <tr>
-    <th> Project name </th>
-    <th> Title </th>
-    <th> Description </th>
-    <th> Point Value </th>
-    <th> Create pull request </th>
-  </tr> 
-</thead>
-<tbody>
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= task.project.name %></td>
-    <td><%= task.title %></td>
-    <td><%= task.description %></td>
-    <td><%= task.point_value %></td>
-    <td><%= link_to 'Pull Request', new_pull_request_path(:task_id => task) %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>  
+<div class="table_container">
+  <h2> Active Tasks </h2>
+  <div class="table_wrapper">
+    <table>
+    <thead>
+      <tr>
+        <th> Project name </th>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Point Value </th>
+        <th> Create pull request </th>
+      </tr> 
+    </thead>
+    <tbody>
+    <% @open_tasks.each do |task| %>
+      <tr>
+        <td><%= task.project.name %></td>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.point_value %></td>
+        <td><%= link_to 'Pull Request', new_pull_request_path(:task_id => task) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>  
+</div>
+
+<div class="table_container">
+  <h2> Pending Tasks </h2>
+  <div class="table_wrapper">
+    <table>
+    <thead>
+      <tr>
+        <th> Project name </th>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Point Value </th>
+      </tr> 
+    </thead>
+    <tbody>
+    <% @pending_tasks.each do |task| %>
+      <tr>
+        <td><%= task.project.name %></td>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.point_value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>
+</div>
