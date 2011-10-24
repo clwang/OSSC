@@ -15,10 +15,10 @@
     <%= f.text_field :title %> <br />
     <%= f.label :body %>
     <%= f.text_field :body %> <br />
-    <%= f.label :base, 'Base Branch' %>
-    <%= f.select :base, @branches, {} %> <br />
     <%= f.label :head, 'Head Branch' %>
-    <%= f.text_field :head, :value => 'master' %>
+    <%= f.select :head, @branches, {} %> <br />
+    <%= f.label :base, 'Base Branch' %>
+    <%= f.text_field :base, :value => 'master' %>
     <%= f.hidden_field :task_id, :value => @task.id %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :repo_name, :value => @project.repo_name %>

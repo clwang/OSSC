@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_repo_list
-    create_git_instance
+    create_github_instance
     @repo_names = []
     @git.repos.list_repos.each do | repo |
       option = [repo.name,repo.name]
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def get_branches_for_repo(user_name, repo_name)
     # needs to have the 'user-name' and 'repo-name' as params
-    create_git_instance
+    create_github_instance
     @branches = []
     @git.repos.branches(user_name,repo_name).each do | branch |
       option = [branch.name,branch.name]
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def create_git_instance
+  def create_github_instance
     token = current_user.user_oauth_tokens.first.access_token
     @git = Github.new(:oauth_token => token)
   end

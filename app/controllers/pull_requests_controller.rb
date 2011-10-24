@@ -3,6 +3,10 @@ class PullRequestsController < ApplicationController
   
   def index
     # We should list the pull requests either both Github and our model
+    # We need to get the list of repos that the user has, and also get the user's github nickname
+    @user_name = current_user.nickname
+    @repo_list = current_user.projects.where("repo_name IS NOT NULL").map(&:repo_name)
+    list_github_pull_requests
   end
 
   def show
@@ -27,13 +31,15 @@ class PullRequestsController < ApplicationController
     @pull_request.status = "open"
     @pull_request.save!
 
-    @todo = Todo.find(params[:task_id])
+    @todo = Todo.where(:task_id => params[:pull_request][:task_id], :user_id => current_user.id).first
     @todo.status = "pending"
     @todo.save!
 
     flash[:success] = "Pull request has been created."
 
-    create_github_pull_request
+    # @prepared_head = "#{current_user.nickname}:#{params[:pull_request][:head]}"
+    # The github pull request api for creation does not seem to be working, will contact the devs and hopefully get this fixed asap
+    # create_github_pull_request
 
     redirect_to todo_index_path
   end
@@ -43,8 +49,30 @@ class PullRequestsController < ApplicationController
   end
 
   private
+    
+    def list_github_pull_requests
+      #  @pull_reqs = Github::PullRequests.new
+      #  @pull_reqs.pull_requests 'user-name', 'repo-name'
+      create_github_instance
+      @repo_pulls = {}
+      # loop through each repo and get the list of pull requests
+      @repo_list.each do | repo |
+        @repo_pulls[repo.to_sym] = @git.pull_requests.pull_requests @user_name, repo
+      end
+    end
+
     def create_github_pull_request
-      # figure out the params need to make the pull request
+      #  @github.pull_requests.create_request 'user-name', 'repo-name',
+      #    "title" => "Amazing new feature",
+      #    "body" => "Please pull this in!",
+      #    "head" => "octocat:new-feature",
+      #    "base" => "master"
+      create_github_instance
+      @git.pull_requests.create_request current_user.nickname, params[:pull_request][:repo_name],
+        "title" => params[:pull_request][:title],
+        "body" => params[:pull_request][:body],
+        "head" => @prepared_head,
+        "base" => params[:pull_request][:base]
     end
 
     def setup_github_pull_request
