@@ -41,6 +41,10 @@ span {
   font-size: 12px;
 }
 
+#header {
+  height: 40px;
+}
+
 .main_nav {
   margin-bottom: 10px;
 }
@@ -48,6 +52,11 @@ span {
 .main_nav a {
   padding: 5px;
   font-size: 1.2em;
+  float: left;
+}
+
+.preferences {
+  float: right;
 }
 
 /* Generic Table styles */
