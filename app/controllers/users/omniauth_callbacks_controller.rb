@@ -16,6 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       user = User.new
       user.apply_omniauth(auth)
+      
       if user.save
         flash[:notice] = "Signed in successfully."
         sign_in_and_redirect(:user, user)

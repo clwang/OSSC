@@ -1,27 +1,35 @@
-list of pull requests by project
-
 <div>
-  <% @repo_pulls.each_pair do | k,v | %>
-    <div>
-    <h2><%= k.to_s %></h2>
-      <table>
-      <thead>
-        <tr>
-          <th> Title </th>
-          <th> Body </th>
-          <th> URL </th>
-          <th> Actions </th>
-        </tr> 
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= v.first.title %></td>
-          <td><%= v.first.body %></td>
-          <td><%= v.first.html_url %></td>
-          <td>Merge/Deny</td>
-        </tr>
-      </tbody>
-      </table>
-    </div> 
+  <% unless @repo_pulls.nil? %>
+    <% @repo_pulls.each_pair do | k,v | %>
+        <div>
+        <% unless v.empty? %>
+          <h2><%= k.to_s %></h2>
+            <table style="width: 1000px;">
+            <thead>
+              <tr>
+                <th> Title </th>
+                <th> Body </th>
+                <th> URL </th>
+                <th> Actions </th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= v.first.title %></td>
+                <td><%= v.first.body %></td>
+                <td><%= link_to v.first.html_url.to_s, v.first.html_url, :target => "_blank" %></td>
+                <td><%= link_to "Merge", merge_pull_request_path(v.first.id), :method => "POST" %> &nbsp;|&nbsp;
+                    <%= link_to "Deny", deny_pull_request_path(v.first.id), :method => "POST" %>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          <% else %>
+            <h2> no pull requests available for <%= k.to_s %> </h2>
+          <% end %>
+        </div>
+    <% end %>
+  <% else %>
+    <h2> no pull requests available! </h2>
   <% end %> 
 </div>

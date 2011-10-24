@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :uid, :nickname 
   has_many :projects
   has_many :user_oauth_tokens, :class_name => "UserOauthToken"
-  has_one :rank, :class_name => "Rank", :foreign_key => "rank_id"
+  has_one :rank, :class_name => "Rank", :foreign_key => "user_id"
   has_many :todos, :class_name => "Todo"
   has_many :tasks, :through => :todos
   

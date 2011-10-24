@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017213545) do
+ActiveRecord::Schema.define(:version => 20111024200921) do
 
   create_table "projects", :force => true do |t|
     t.datetime "created_at"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20111017213545) do
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "github_id"
   end
 
   create_table "ranks", :force => true do |t|
