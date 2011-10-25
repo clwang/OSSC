@@ -2,14 +2,18 @@
   <h2>Leaderboard</h2>
   <table>
     <tr>
+      <th>Position</th>
       <th>Nickname</th>
       <th>Points</th>
     </tr>
-    <% @users.each do |user| %>
+    <% counter = 1 %>
+    <% @rankings.each do |rank| %>
     <tr>
-      <td><%= user.nickname %></td>
-      <td><%= user.rank.user_points %></td>
+      <td><%= counter %></td>
+      <td><%= rank.user.nickname ? rank.user.nickname : rank.user.email %></td>
+      <td><%= rank.user_points %></td>
     </tr>
+    <% counter = counter + 1 %>
     <% end %>
   </table>
 </div>

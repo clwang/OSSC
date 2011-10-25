@@ -12,6 +12,13 @@ span {
   font: 16px "Helvetica", Verdana, sans-serif;
 }
 
+.alert {
+  color: red;
+}
+
+.notice {
+  color: green;
+}
 #main_container {
   width: 1000px;
   height: 800px;

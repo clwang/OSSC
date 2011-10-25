@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_filter :find_project, :except => :show
   
   def index
-    @tasks = @project.tasks
+    @tasks = @project.tasks.where(:status => "open")
   end
   
   def new

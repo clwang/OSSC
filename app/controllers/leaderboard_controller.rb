@@ -1,6 +1,6 @@
 class LeaderboardController < ApplicationController
 
   def index
-    @users = Users.all
+    @rankings = Rank.order("user_points DESC")
   end
 end
