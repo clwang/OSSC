@@ -14,14 +14,16 @@
               </tr> 
             </thead>
             <tbody>
+            <% v.each do | pr | %>
               <tr>
-                <td><%= v.first.title %></td>
-                <td><%= v.first.body %></td>
-                <td><%= link_to v.first.html_url.to_s, v.first.html_url, :target => "_blank" %></td>
-                <td><%= link_to "Merge", merge_pull_request_path(v.first.id), :method => "POST" %> &nbsp;|&nbsp;
-                    <%= link_to "Deny", deny_pull_request_path(v.first.id), :method => "POST" %>
+                <td><%= pr.title %></td>
+                <td><%= pr.body %></td>
+                <td><%= link_to pr.html_url.to_s, pr.html_url, :target => "_blank" %></td>
+                <td><%= link_to "Merge", merge_pull_request_path(pr.number), :method => "POST" %> &nbsp;|&nbsp;
+                    <%= link_to "Deny", deny_pull_request_path(pr.number), :method => "POST" %>
                 </td>
               </tr>
+            <% end %>
             </tbody>
             </table>
           <% else %>

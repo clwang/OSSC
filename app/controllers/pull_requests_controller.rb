@@ -27,9 +27,12 @@ class PullRequestsController < ApplicationController
     #create the pull requests object, also make the pull request via Github API
     # we need to change the status of that todo task to pending request once we create it
     # need to set the todo status to pending
-
+    @prepared_head = "#{current_user.nickname}:#{params[:pull_request][:head]}"
+    create_github_pull_request
     @pull_request = PullRequest.new(params[:pull_request])
     @pull_request.status = "open"
+    Rails.logger.info @response[:id].inspect
+    @pull_request.github_id = @response[:id]
     @pull_request.save!
 
     @todo = Todo.where(:task_id => params[:pull_request][:task_id], :user_id => current_user.id).first
@@ -37,9 +40,6 @@ class PullRequestsController < ApplicationController
     @todo.save!
 
     flash[:notice] = "Pull request has been created."
-
-    @prepared_head = "#{current_user.nickname}:#{params[:pull_request][:head]}"
-    create_github_pull_request
 
     redirect_to todo_index_path
   end
@@ -99,7 +99,7 @@ class PullRequestsController < ApplicationController
   def merge_github_pull_request
     #  @github.pull_requests.merge 'user-name', 'repo-name', 'request-id'
     create_github_instance
-    @git.pull_requests.merge current_user.nickname, @pull_request.repo_name, 1
+    @git.pull_requests.merge current_user.nickname, @pull_request.repo_name, @pull_request.github_id, "commit_message" => "pulled!" 
   end
 
   def sync_github_pull_requests
@@ -133,11 +133,12 @@ class PullRequestsController < ApplicationController
     #    "head" => "octocat:new-feature",
     #    "base" => "master"
     create_github_instance
-    @git.pull_requests.create_request current_user.nickname, params[:pull_request][:repo_name],
+    @response = @git.pull_requests.create_request current_user.nickname, params[:pull_request][:repo_name],
       "title" => params[:pull_request][:title],
       "body" => params[:pull_request][:body],
       "head" => @prepared_head,
       "base" => params[:pull_request][:base]
+    Rails.logger.info @response.inspect
   end
 
   def setup_github_pull_request
