@@ -36,11 +36,10 @@ class PullRequestsController < ApplicationController
     @todo.status = "pending"
     @todo.save!
 
-    flash[:success] = "Pull request has been created."
+    flash[:notice] = "Pull request has been created."
 
-    # @prepared_head = "#{current_user.nickname}:#{params[:pull_request][:head]}"
-    # The github pull request api for creation does not seem to be working, will contact the devs and hopefully get this fixed asap
-    # create_github_pull_request
+    @prepared_head = "#{current_user.nickname}:#{params[:pull_request][:head]}"
+    create_github_pull_request
 
     redirect_to todo_index_path
   end
@@ -50,7 +49,7 @@ class PullRequestsController < ApplicationController
     # then we change the status of the tasks
     # then assign the points of that task to the user
     @pull_request = PullRequest.where(:github_id => params[:id]).first
-    #merge_github_pull_request
+    merge_github_pull_request
 
     @pull_request.status = "closed"
     @pull_request.save!
@@ -68,6 +67,8 @@ class PullRequestsController < ApplicationController
     @user.rank.user_points = user_points + @task.point_value
     @user.rank.save!
 
+    flash[:notice] = "Pull request has been merged"
+
     redirect_to pull_requests_path()
   end
 
@@ -83,6 +84,8 @@ class PullRequestsController < ApplicationController
     @todo = Todo.where(:user_id => @pull_request.user_id, :task_id => @pull_request.task_id).first
     @todo.status = "closed"
     @todo.save!
+
+    flash[:notice] = "Pull request has been denied"
 
     redirect_to pull_requests_path()
   end
@@ -120,7 +123,7 @@ class PullRequestsController < ApplicationController
       @repo_pulls[repo.to_sym] = @git.pull_requests.pull_requests @user_name, repo
     end
     Rails.logger.info @repo_pulls.inspect
-    sync_github_pull_requests
+    #sync_github_pull_requests
   end
 
   def create_github_pull_request

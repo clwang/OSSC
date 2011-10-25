@@ -45,11 +45,12 @@ class ProjectsController < ApplicationController
   def create
     Rails.logger.info params[:project]
     @project = Project.new(params[:project])
+    # if it is a current github project then we do not need to create it on github
     if params[:project][:repo_name].blank?
       @project.repo_name = params[:project][:name]
+      create_github_project
     end
     @project.user_id = current_user.id
-    #create_github_project
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -102,6 +103,6 @@ class ProjectsController < ApplicationController
   def create_github_project
     create_github_instance
     #   @github.repos.create_repo :name => 'repo-name', :org => 'organisation-name'
-    @git.repos.create_repo :name => @project.name      
+    @git.repos.create_repo :name => @project.name, :description => params[:project][:description]      
   end    
 end

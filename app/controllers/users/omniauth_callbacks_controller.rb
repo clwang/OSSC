@@ -11,6 +11,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif current_user
       Rails.logger.info "associated the current user and the github account"
       current_user.user_oauth_tokens.create!(:provider => auth["provider"], :uid => auth["uid"].to_s, :access_token => auth["credentials"]["token"] )
+      current_user.nickname = auth["user_info"]["nickname"]
+      current_user.save!
       flash[:notice] = "Successfully associated your Github account"
       redirect_to dashboard_path()
     else
