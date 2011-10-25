@@ -1,0 +1,15 @@
+<div>
+  <h2>Leaderboard</h2>
+  <table>
+    <tr>
+      <th>Nickname</th>
+      <th>Points</th>
+    </tr>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.nickname %></td>
+      <td><%= user.rank.user_points %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
