@@ -31,8 +31,8 @@ class PullRequestsController < ApplicationController
     create_github_pull_request
     @pull_request = PullRequest.new(params[:pull_request])
     @pull_request.status = "open"
-    Rails.logger.info @response[:id].inspect
-    @pull_request.github_id = @response[:id]
+    Rails.logger.info @response[:number].inspect
+    @pull_request.github_id = @response[:number]
     @pull_request.save!
 
     @todo = Todo.where(:task_id => params[:pull_request][:task_id], :user_id => current_user.id).first
