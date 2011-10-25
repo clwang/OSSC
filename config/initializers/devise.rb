@@ -197,7 +197,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  config.omniauth :github, '303f86ccb8899b1a87c2', '2e8ca901f843cd0bdc230318f884003bea17fbdb'
+  config.omniauth :github, '303f86ccb8899b1a87c2', '2e8ca901f843cd0bdc230318f884003bea17fbdb',
+        {:scope => 'user,  repo'}, # uncomment this for heroku :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
