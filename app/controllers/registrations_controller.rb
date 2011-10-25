@@ -2,7 +2,8 @@ class RegistrationsController < Devise::RegistrationsController
   
   def create  
     super  
-    session[:omniauth] = nil unless @user.new_record?   
+    session[:omniauth] = nil unless @user.new_record?
+    Rank.create(:user_id => @user.id, :user_points => 0) 
   end
 
   private

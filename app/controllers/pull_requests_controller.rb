@@ -120,7 +120,7 @@ class PullRequestsController < ApplicationController
       @repo_pulls[repo.to_sym] = @git.pull_requests.pull_requests @user_name, repo
     end
     Rails.logger.info @repo_pulls.inspect
-    #sync_github_pull_requests
+    sync_github_pull_requests
   end
 
   def create_github_pull_request
