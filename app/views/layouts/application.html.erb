@@ -13,15 +13,22 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
   </div>
-  <div class="login_information">
+  <div id="header_wrapper">
+    <div class="user_stats">
     <% if user_signed_in? %>
-      <span>Logged in as: <%= current_user.email %></span> 
-      <span><%= link_to 'Log Out', destroy_user_session_path, :method => 'DELETE' %>
-    <% else %>
-      <span><%= link_to 'Sign in', new_user_session_path %></span>
-      <span><%= link_to 'Register an account', new_user_registration_path %></span>
+      <span>Points:&nbsp; <%= current_user.rank.user_points %></span>
+      <span>Rank:&nbsp; <%= current_user.rank.ranking %></span>
     <% end %>
-
+    </div>
+    <div class="login_information">
+      <% if user_signed_in? %>
+        <span>Logged in as: <%= current_user.email %></span> 
+        <span><%= link_to 'Log Out', destroy_user_session_path, :method => 'DELETE' %>
+      <% else %>
+        <span><%= link_to 'Sign in', new_user_session_path %></span>
+        <span><%= link_to 'Register an account', new_user_registration_path %></span>
+      <% end %>
+    </div>
   </div>
   <div class="clear"></div>
   <% if user_signed_in? %>
