@@ -45,8 +45,11 @@ class ProjectsController < ApplicationController
   def create
     Rails.logger.info params[:project]
     @project = Project.new(params[:project])
-    @project.total_points = 100 # this will be the default for now
+    if params[:project][:repo_name].blank?
+      @project.repo_name = params[:project][:name]
+    end
     @project.user_id = current_user.id
+    #create_github_project
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -92,5 +95,13 @@ class ProjectsController < ApplicationController
     else
       @projects = nil
     end
+  end
+  
+  private
+  
+  def create_github_project
+    create_github_instance
+    #   @github.repos.create_repo :name => 'repo-name', :org => 'organisation-name'
+    @git.repos.create_repo :name => @project.name      
   end    
 end
