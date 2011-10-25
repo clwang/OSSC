@@ -23,6 +23,7 @@ Ossc::Application.routes.draw do
 
   get "home/index"
   
+  match '/leaderboard' => "leaderboard#index"
   match '/dashboard' => "dashboard#index"
 
   # The priority is based upon order of creation:
