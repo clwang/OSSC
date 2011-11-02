@@ -48,14 +48,15 @@ class ProjectsController < ApplicationController
     # if it is a current github project then we do not need to create it on github
     if params[:project][:repo_name].blank?
       @project.repo_name = params[:project][:name]
-      create_github_project
     end
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
+        create_github_project
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
+        get_repo_list
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
