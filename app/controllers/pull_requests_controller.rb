@@ -20,6 +20,7 @@ class PullRequestsController < ApplicationController
     @task = Task.find(params[:task_id])
     @project = @task.project
     setup_github_pull_request
+    Rails.logger.info @branches.inspect
     @pull_request = PullRequest.new
   end
 
@@ -28,6 +29,7 @@ class PullRequestsController < ApplicationController
     # we need to change the status of that todo task to pending request once we create it
     # need to set the todo status to pending
     @prepared_head = "#{current_user.nickname}:#{params[:pull_request][:head]}"
+    @project_username = Task.find(params[:pull_request][:task_id]).project.user.nickname
     create_github_pull_request
     @pull_request = PullRequest.new(params[:pull_request])
     @pull_request.status = "open"
@@ -62,10 +64,13 @@ class PullRequestsController < ApplicationController
     @todo.status = "closed"
     @todo.save!
 
-    @user = User.find(@pull_request.user_id)
-    user_points = @user.rank.user_points
-    @user.rank.user_points = user_points + @task.point_value
-    @user.rank.save!
+    # this is to prevent project owners from gaining points from completing their own tasks
+    if current_user.id != @pull_request.user_id
+      @user = User.find(@pull_request.user_id)
+      user_points = @user.rank.user_points
+      @user.rank.user_points = user_points + @task.point_value
+      @user.rank.save!
+    end
 
     flash[:notice] = "Pull request has been merged"
 
@@ -133,7 +138,7 @@ class PullRequestsController < ApplicationController
     #    "head" => "octocat:new-feature",
     #    "base" => "master"
     create_github_instance
-    @response = @git.pull_requests.create_request current_user.nickname, params[:pull_request][:repo_name],
+    @response = @git.pull_requests.create_request @project_username, params[:pull_request][:repo_name],
       "title" => params[:pull_request][:title],
       "body" => params[:pull_request][:body],
       "head" => @prepared_head,
