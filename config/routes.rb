@@ -22,7 +22,8 @@ Ossc::Application.routes.draw do
   end
 
   get "home/index"
-  
+
+  match '/faq' => "dashboard#faq"
   match '/leaderboard' => "leaderboard#index"
   match '/dashboard' => "dashboard#index"
 

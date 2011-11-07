@@ -4,4 +4,8 @@ class DashboardController < ApplicationController
     
   end
 
+  def faq
+    
+  end
+
 end

@@ -84,6 +84,14 @@ span {
   font-size: 1.2em;
 }
 
+#faq_container {
+  text-align: left;
+}
+
+#faq_container ol > li {
+  margin-bottom: 2em;
+}
+
 /* Generic Table styles */
 
 .table_container {
