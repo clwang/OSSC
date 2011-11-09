@@ -98,10 +98,23 @@ span {
   margin-bottom: 2em;
 }
 
+#faq_container p {
+  font-size: 16px;
+}
+
 .empty {
   border: 2px dotted black;
   padding: 20px;
   color: red;
+}
+
+#pull_request_wrapper {
+  padding: 10px;
+}
+
+#pull_request_wrapper input, textarea, select {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 /* Generic Table styles */
