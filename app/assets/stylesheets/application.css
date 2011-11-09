@@ -92,10 +92,16 @@ span {
   margin-bottom: 2em;
 }
 
+.empty {
+  border: 2px dotted black;
+  padding: 20px;
+  color: red;
+}
+
 /* Generic Table styles */
 
 .table_container {
-
+  margin-bottom: 40px;
 }
 
 .table_container h2 {
@@ -103,11 +109,12 @@ span {
 }
 
 .table_wrapper {
-  width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 table {
   border: 1px solid;
+  width: 100%;
 }
 
 table th {
