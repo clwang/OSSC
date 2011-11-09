@@ -6,9 +6,9 @@
   <p><%= @project.description %></p>
 </div>
 
-<div>
+<div style="margin-bottom: 9px;">
   <% if can? :create, @project.tasks.build %>
-    <%= link_to 'Create a task', new_project_task_path(@project) %>
+    <%= link_to 'Create a task', new_project_task_path(@project) %> | 
   <% end %>
   <%= link_to 'View tasks', project_tasks_path(@project) %>
 </div>

@@ -53,6 +53,12 @@ span {
   text-align: center;
 }
 
+.body_content a {
+  font-size: 14px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
 .form {
   text-align: left;
 }
