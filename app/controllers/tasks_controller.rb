@@ -8,6 +8,7 @@ class TasksController < ApplicationController
   
   def new
     @task = @project.tasks.build
+    authorize! :create, @task
   end
   
   def create
