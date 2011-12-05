@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_authorize_resource :only => :fork 
   # GET /projects
   # GET /projects.json
   def index
@@ -16,7 +17,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -98,6 +98,11 @@ class ProjectsController < ApplicationController
       @projects = nil
     end
   end
+
+  def fork
+    fork_github_project
+    redirect_to project_path(@project), :notice => "Project has been forked!"
+  end
   
   private
   
@@ -105,5 +110,18 @@ class ProjectsController < ApplicationController
     create_github_instance
     #   @github.repos.create_repo :name => 'repo-name', :org => 'organisation-name'
     @git.repos.create_repo :name => @project.name, :description => params[:project][:description]      
-  end    
+  end
+  
+  def fork_github_project
+    #  @github.repos.create_fork 'user-name', 'repo-name',
+    #    "org" =>  "github"
+    create_github_instance
+    @git.repos.create_fork @project.user.nickname, @project.repo_name
+  end
+  
+  def list_github_forks
+    #  @github.repos.forks 'user-name', 'repo-name'
+    create_github_instance
+    @forks = @git.repos.forks current_user.nickname, @project.repo_name
+  end  
 end

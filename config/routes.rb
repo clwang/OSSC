@@ -3,6 +3,9 @@ Ossc::Application.routes.draw do
     collection do
       get :my_projects
     end
+    member do 
+      post :fork
+    end
     resources :tasks
   end
   
